@@ -1,5 +1,6 @@
 import 'package:coolmovies/API/graphql_client.dart';
-import 'package:coolmovies/all_movies/all_movies.dart';
+import 'package:coolmovies/pages/all_movies/all_movies_view.dart';
+import 'package:coolmovies/pages/movie_details/movie_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Coolmovies'),
+      home: const AllMoviesView(),
+      routes: {'DetailScreen': (context) => MovieDetailView()},
     );
   }
 }
