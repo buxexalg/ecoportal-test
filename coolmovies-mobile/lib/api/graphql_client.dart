@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class MoviesApiClient {
@@ -23,5 +25,13 @@ class MoviesApiClient {
     ),
   );
 
-  
+  Future<QueryResult> query(BuildContext context, DocumentNode query) async {
+    var client = GraphQLProvider.of(context).value;
+
+    final QueryResult result = await client.query(QueryOptions(
+      document: query,
+    ));
+
+    return result;
+  }
 }
