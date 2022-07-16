@@ -93,7 +93,7 @@ class MovieDetailReviewComponent extends StatelessWidget {
   final int index;
   final String reviewTitle;
   final String reviewBody;
-  final String reviewRating;
+  final int reviewRating;
   final String reviewMovie;
   final String reviewUser;
 
@@ -127,7 +127,7 @@ class MovieDetailReviewComponent extends StatelessWidget {
                 Row(
                   children: [
                     MovieReviewsRowComponent(
-                        reviewRating,
+                        reviewRating.toString(),
                         Icon(
                           Icons.star,
                           color: Colors.white,
