@@ -40,6 +40,7 @@ class Node {
     required this.releaseDate,
     required this.nodeId,
     required this.userByUserCreatorId,
+    required this.movieDirectorByMovieDirectorId,
   });
 
   final String id;
@@ -50,6 +51,7 @@ class Node {
   final DateTime releaseDate;
   final String nodeId;
   final UserByUserCreatorId userByUserCreatorId;
+  final MovieDirectorByMovieDirectorId movieDirectorByMovieDirectorId;
 
   factory Node.fromJson(Map<String, dynamic> json) => Node(
         id: json["id"],
@@ -61,6 +63,8 @@ class Node {
         nodeId: json["nodeId"],
         userByUserCreatorId:
             UserByUserCreatorId.fromJson(json["userByUserCreatorId"]),
+        movieDirectorByMovieDirectorId: MovieDirectorByMovieDirectorId.fromJson(
+            json["movieDirectorByMovieDirectorId"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,10 +73,29 @@ class Node {
         "movieDirectorId": movieDirectorId,
         "userCreatorId": userCreatorId,
         "title": title,
-        "releaseDate": convertDate(
-            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}"),
+        "releaseDate":
+            "${releaseDate.year.toString().padLeft(4, '0')}-${releaseDate.month.toString().padLeft(2, '0')}-${releaseDate.day.toString().padLeft(2, '0')}",
         "nodeId": nodeId,
         "userByUserCreatorId": userByUserCreatorId.toJson(),
+        "movieDirectorByMovieDirectorId":
+            movieDirectorByMovieDirectorId.toJson(),
+      };
+}
+
+class MovieDirectorByMovieDirectorId {
+  MovieDirectorByMovieDirectorId({
+    required this.name,
+  });
+
+  final String name;
+
+  factory MovieDirectorByMovieDirectorId.fromJson(Map<String, dynamic> json) =>
+      MovieDirectorByMovieDirectorId(
+        name: json["name"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "name": name,
       };
 }
 
@@ -101,8 +124,6 @@ class UserByUserCreatorId {
       };
 }
 
-String convertDate(String date) {
-  final dateArray = date.split("-");
-
-  return dateArray[2] + '/' + dateArray[1] + '/' + dateArray[0];
+String convertDate(DateTime date) {
+  return "${date.day.toString().padLeft(2, '0')}-${date.month.toString().padLeft(2, '0')}-${date.year.toString()}";
 }
