@@ -1,4 +1,5 @@
 import 'package:coolmovies/API/graphql_client.dart';
+import 'package:coolmovies/pages/add_review_form/add_review_view.dart';
 import 'package:coolmovies/pages/all_movies/all_movies_view.dart';
 import 'package:coolmovies/pages/movie_details/movie_detail_view.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const AllMoviesView(),
-      routes: {'DetailScreen': (context) => MovieDetailView()},
+      routes: {
+        'DetailScreen': (context) => MovieDetailView(),
+        'FormScreen': (context) => AddReviewView()
+      },
     );
   }
 }
