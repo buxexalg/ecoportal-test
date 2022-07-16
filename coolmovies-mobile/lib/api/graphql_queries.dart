@@ -43,3 +43,26 @@ final getAllMovieReviewsQuery = gql(r"""
         }
       }
     """);
+
+final getMovieById = gql(r"""
+query MyQuery($id: UUID!) {
+  movieById(id: $id) {
+    imgUrl
+    releaseDate
+    title
+    movieDirectorByMovieDirectorId {
+      name
+    }
+    movieReviewsByMovieId {
+      nodes {
+        body
+        rating
+        title
+        userByUserReviewerId {
+          name
+        }
+      }
+    }
+  }
+}
+""");
