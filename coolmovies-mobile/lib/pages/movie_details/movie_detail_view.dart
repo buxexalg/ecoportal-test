@@ -16,74 +16,87 @@ class _MovieDetailViewState extends State<MovieDetailView> {
     String? id = ModalRoute.of(context)?.settings.arguments as String;
 
     return Scaffold(
-      body: Column(children: [
-        Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            child: Stack(
-              children: <Widget>[
-                Positioned(top: 0, child: PosterDetailQueryComponent(id)),
-                Container(),
-                Positioned(
-                  bottom: 0,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(30),
-                          topLeft: Radius.circular(30)),
-                      color: Color(0xff0f1c26),
-                    ),
-                    child: Stack(
-                      children: [
-                        Container(
-                          transform:
-                              Matrix4.translationValues(20.0, -50.0, 0.0),
-                          child: MoviePosterQueryComponent(id),
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 20,
-                            ),
-                            MovieDetailQueryComponent(id),
-                            Container(
-                              height: 5,
-                            ),
-                            Column(
-                              children: [
-                                TitleTextComponent("Reviews"),
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.45,
-                                  child: MovieDetailReviewQueryComponent(id),
-                                ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.8,
-                  ),
-                ),
-                Positioned(
-                  top: 20,
-                  left: 20,
-                  child: FloatingActionButton(
-                      heroTag: "backButton",
-                      child: Icon(
-                        Icons.arrow_back,
-                        size: 26,
+      body: Column(
+        children: [
+          Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Stack(
+                children: <Widget>[
+                  Positioned(top: 0, child: PosterDetailQueryComponent(id)),
+                  Container(),
+                  Positioned(
+                    bottom: 0,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(30),
+                            topLeft: Radius.circular(30)),
+                        color: Color(0xff0f1c26),
                       ),
-                      backgroundColor: Color(0xff0f1c26),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      }),
-                ),
-              ],
-            ))
-      ]),
+                      child: Stack(
+                        children: [
+                          Container(
+                            transform:
+                                Matrix4.translationValues(20.0, -50.0, 0.0),
+                            child: MoviePosterQueryComponent(id),
+                          ),
+                          Column(
+                            children: [
+                              Container(
+                                height: 20,
+                              ),
+                              MovieDetailQueryComponent(id),
+                              Column(
+                                children: [
+                                  TitleTextComponent("Reviews"),
+                                  TextButton.icon(
+                                    style: TextButton.styleFrom(
+                                      primary: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      {
+                                        Navigator.pushNamed(
+                                            context, 'FormScreen',
+                                            arguments: id);
+                                      }
+                                    },
+                                    icon: const Icon(Icons.add),
+                                    label: Text('Add review'),
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.38,
+                                    child: MovieDetailReviewQueryComponent(id),
+                                  ),
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      width: MediaQuery.of(context).size.width,
+                      height: MediaQuery.of(context).size.height * 0.8,
+                    ),
+                  ),
+                  Positioned(
+                    top: 20,
+                    left: 20,
+                    child: FloatingActionButton(
+                        heroTag: "backButton",
+                        child: Icon(
+                          Icons.arrow_back,
+                          size: 26,
+                        ),
+                        backgroundColor: Color(0xff0f1c26),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        }),
+                  ),
+                ],
+              ))
+        ],
+      ),
     );
   }
 }
