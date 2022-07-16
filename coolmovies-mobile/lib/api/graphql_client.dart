@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 
 class MoviesApiClient {
   static HttpLink httpLink = HttpLink(
