@@ -4,6 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class MoviesApiClient {
   static HttpLink httpLink = HttpLink(
@@ -24,14 +26,44 @@ class MoviesApiClient {
       cache: GraphQLCache(store: HiveStore()),
     ),
   );
+}
 
-  Future<QueryResult> query(BuildContext context, DocumentNode query) async {
-    var client = GraphQLProvider.of(context).value;
+class QueryWrapper<T> extends StatelessWidget {
+  const QueryWrapper({
+    Key? key,
+    required this.queryString,
+    required this.contentBuilder,
+    this.variables,
+  }) : super(key: key);
 
-    final QueryResult result = await client.query(QueryOptions(
-      document: query,
-    ));
+  final Map<String, dynamic>? variables;
+  final DocumentNode queryString;
+  final Widget Function(Map<String, dynamic> data) contentBuilder;
 
-    return result;
+  @override
+  Widget build(BuildContext context) {
+    return Query(
+      options: QueryOptions(
+        fetchPolicy: FetchPolicy.cacheAndNetwork,
+        document: queryString,
+        variables: variables ?? const {},
+      ),
+      builder: (QueryResult result,
+          {VoidCallback? refetch, FetchMore? fetchMore}) {
+        if (result.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        if (result.hasException) {
+          print(result.exception.toString());
+        }
+
+        if (result.data != null) {
+          return contentBuilder(result.data!);
+        }
+
+        return Container();
+      },
+    );
   }
 }
