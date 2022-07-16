@@ -16,7 +16,30 @@ final getAllMoviesQuery = gql(r"""
                   name
                   nodeId
                 }
+                movieDirectorByMovieDirectorId {
+                  name
+                }
               }
             }
           }
         """);
+
+final getAllMovieReviewsQuery = gql(r"""
+          query getAllMovieReviews {
+            allMovieReviews(orderBy: RATING_DESC) {
+              nodes {
+                id
+                rating
+                title
+                body
+            userByUserReviewerId {
+              name
+            }
+            movieByMovieId {
+              title
+              id
+            }
+          }
+        }
+      }
+    """);
