@@ -106,7 +106,7 @@ class MovieDetailReviewComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: index == 0
-          ? const EdgeInsets.only(left: 20, right: 20, top: 10)
+          ? const EdgeInsets.only(left: 20, right: 20)
           : const EdgeInsets.symmetric(horizontal: 20),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.75,
