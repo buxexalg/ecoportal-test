@@ -1,26 +1,11 @@
 # Coolmovies mobile challenge
 
-You have to add the cool movies review feature to the existing `coolmovies-mobile`.
+This repository contains a Flutter app that consumes with graphQL a list of movies and reviews registered in a backend database the option to see more detailed information about the movie and add a review.
 
-This folder contains a basic Flutter application with some example callbacks.
+## Screenshots
 
-We've setup GraphQL for you. We recommend that you work on an emulator only, there's no need to test your application in a real device.
+![image](https://user-images.githubusercontent.com/69545590/179402705-f74d0fc3-038c-4496-b498-9295abdb1348.png)
 
-## Acceptance Criteria
+![image](https://user-images.githubusercontent.com/69545590/179402713-d39fae6f-7565-478b-acab-457b5410f3cf.png)
 
-**You will be evaluated on your UI/UX as we believe this is an important skill to have. Please put time and effort into this.**
-
-**DO NOT USE EXISTING TEMPLATES. You can copy the design but not the code, we have to evaluate you by your coding skills.**
-
-For your solution to be accepted it is required that your application is able to:
-
-1. List all the available movies, showing at least the title
-2. Tapping on a movie must open a view page presenting all the available information to the user
-3. Each movie page must display all its reviews
-4. Each review should consist of (at least): title, body and stars (1-5)
-5. The user should be able to create new reviews
-6. The user should be able to edit their own reviews
-
-Anything else is up to you (animations, assets, 3rd party dependencies, etc). We will consider all your additions so don't stick to the minimum!
-
-Good luck!
+![image](https://user-images.githubusercontent.com/69545590/179402727-6580f1ba-c6df-4e85-ae87-5f8ec3ea2606.png)
