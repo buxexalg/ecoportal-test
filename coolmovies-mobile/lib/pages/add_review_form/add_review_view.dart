@@ -1,5 +1,7 @@
 import 'package:coolmovies/api/graphql_mutations.dart';
 import 'package:coolmovies/model/createUser_model.dart';
+import 'package:coolmovies/model/movie_detail_model.dart';
+import 'package:coolmovies/pages/movie_details/movie_detail_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -16,6 +18,7 @@ class _AddReviewViewState extends State<AddReviewView> {
   String? _rating;
   String? _title;
   String? _body;
+  String? _userId;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -112,7 +115,7 @@ class _AddReviewViewState extends State<AddReviewView> {
 
                               var client = GraphQLProvider.of(context).value;
 
-                              final a = await client.mutate(MutationOptions(
+                              await client.mutate(MutationOptions(
                                 document: createMovieReview,
                                 variables: {
                                   'body': _body,
@@ -124,18 +127,20 @@ class _AddReviewViewState extends State<AddReviewView> {
                                 },
                               ));
 
-                              print(a.exception);
+                              Navigator.popUntil(
+                                  context, (route) => route.isFirst);
+
+                              Navigator.pushNamed(context, 'DetailScreen',
+                                  arguments: id);
                             }),
                         builder:
                             (RunMutation runMutation, QueryResult? result) {
                           return ElevatedButton(
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
 
-                                runMutation({'name': _name});
-
-                                Navigator.pop(context);
+                                await runMutation({'name': _name});
                               }
                               ;
                             },
